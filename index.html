@@ -95,9 +95,16 @@
           </div>
           
           <div class="resumebtn">
-            <a href="https://www.linkedin.com/in/nainshoo-singh-8902a88a/" class="btn"><span>Resume</span>
+            <a href="https://www.linkedin.com/in/nainshoo-singh-8902a88a/" class="btn"><span>MY LINKS</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
+            <br></br>
+            <br></br>
+            <div id="smart-button-container">
+              <div style="text-align: center;">
+                <div id="paypal-button-container"></div>
+              </div>
+            </div>
         </div>
   
       </div>
@@ -248,6 +255,8 @@
   </section>
   <!-- footer section ends -->
   <script src="https://unpkg.com/ityped@0.0.10"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AbZVD8B2xNqfPfv8DK8I616b6kX6ySA8ymH0bNa4lda4T6tH-Al8i7s9eF1u_yD6-mmEs5LxJ7bJhRp4&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+  
       <!-- <script>
             window.ityped.init(document.querySelector('.ityped'),{
                 strings: ['Full-Stack development', 'Block chain Learning', 'Building Daap for crypto wallets', 'Tech Communities','I love programming!',
@@ -263,6 +272,45 @@
               backSpeed: 40,
               loop: true,
           });
+          function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"Web based solutions","amount":{"currency_code":"USD","value":99}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+            // Or go to another URL:  actions.redirect('thank_you.html');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+
        </script>
   
   </body>
